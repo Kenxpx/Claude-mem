@@ -1,301 +1,69 @@
+# Claude-Mem
 
+**Claude-Mem** is a persistent memory compression and retrieval system designed for long-running work in Claude Code environments. It enables durable context retention across sessions by observing tool usage, summarizing semantic intent, and selectively reinjecting relevant knowledge when needed.
 
-<h1 align="center">
-  <br>
-  <a href="https://github.com/thedotmack/claude-mem">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-dark-mode.webp">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp" alt="Claude-Mem" width="400">
-    </picture>
-  </a>
-  <br>
-</h1>
-
-<p align="center">
-  <a href="docs/i18n/README.zh.md">🇨🇳 中文</a> •
-  <a href="docs/i18n/README.ja.md">🇯🇵 日本語</a> •
-  <a href="docs/i18n/README.pt-br.md">🇧🇷 Português</a> •
-  <a href="docs/i18n/README.ko.md">🇰🇷 한국어</a> •
-  <a href="docs/i18n/README.es.md">🇪🇸 Español</a> •
-  <a href="docs/i18n/README.de.md">🇩🇪 Deutsch</a> •
-  <a href="docs/i18n/README.fr.md">🇫🇷 Français</a>
-  <a href="docs/i18n/README.he.md">🇮🇱 עברית</a> •
-  <a href="docs/i18n/README.ar.md">🇸🇦 العربية</a> •
-  <a href="docs/i18n/README.ru.md">🇷🇺 Русский</a> •
-  <a href="docs/i18n/README.pl.md">🇵🇱 Polski</a> •
-  <a href="docs/i18n/README.cs.md">🇨🇿 Čeština</a> •
-  <a href="docs/i18n/README.nl.md">🇳🇱 Nederlands</a> •
-  <a href="docs/i18n/README.tr.md">🇹🇷 Türkçe</a> •
-  <a href="docs/i18n/README.uk.md">🇺🇦 Українська</a> •
-  <a href="docs/i18n/README.vi.md">🇻🇳 Tiếng Việt</a> •
-  <a href="docs/i18n/README.id.md">🇮🇩 Indonesia</a> •
-  <a href="docs/i18n/README.th.md">🇹🇭 ไทย</a> •
-  <a href="docs/i18n/README.hi.md">🇮🇳 हिन्दी</a> •
-  <a href="docs/i18n/README.bn.md">🇧🇩 বাংলা</a> •
-  <a href="docs/i18n/README.ro.md">🇷🇴 Română</a> •
-  <a href="docs/i18n/README.sv.md">🇸🇪 Svenska</a> •
-  <a href="docs/i18n/README.it.md">🇮🇹 Italiano</a> •
-  <a href="docs/i18n/README.el.md">🇬🇷 Ελληνικά</a> •
-  <a href="docs/i18n/README.hu.md">🇭🇺 Magyar</a> •
-  <a href="docs/i18n/README.fi.md">🇫🇮 Suomi</a> •
-  <a href="docs/i18n/README.da.md">🇩🇰 Dansk</a> •
-  <a href="docs/i18n/README.no.md">🇳🇴 Norsk</a>
-</p>
-
-<h4 align="center">Persistent memory compression system built for <a href="https://claude.com/claude-code" target="_blank">Claude Code</a>.</h4>
-
-<p align="center">
-  <a href="LICENSE">
-    <img src="https://img.shields.io/badge/License-AGPL%203.0-blue.svg" alt="License">
-  </a>
-  <a href="package.json">
-    <img src="https://img.shields.io/badge/version-6.5.0-green.svg" alt="Version">
-  </a>
-  <a href="package.json">
-    <img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg" alt="Node">
-  </a>
-  <a href="https://github.com/thedotmack/awesome-claude-code">
-    <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome Claude Code">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://trendshift.io/repositories/15496" target="_blank">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/claude-mem | Trendshift" width="250" height="55"/>
-    </picture>
-  </a>
-</p>
-
-<br>
-
-<p align="center">
-  <a href="https://github.com/thedotmack/claude-mem">
-    <picture>
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/cm-preview.gif" alt="Claude-Mem Preview" width="800">
-    </picture>
-  </a>
-</p>
-
-<p align="center">
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#how-it-works">How It Works</a> •
-  <a href="#mcp-search-tools">Search Tools</a> •
-  <a href="#documentation">Documentation</a> •
-  <a href="#configuration">Configuration</a> •
-  <a href="#troubleshooting">Troubleshooting</a> •
-  <a href="#license">License</a>
-</p>
-
-<p align="center">
-  Claude-Mem seamlessly preserves context across sessions by automatically capturing tool usage observations, generating semantic summaries, and making them available to future sessions. This enables Claude to maintain continuity of knowledge about projects even after sessions end or reconnect.
-</p>
+The system addresses a fundamental limitation of session-based AI tooling: loss of project context once a session ends.
 
 ---
 
-## Quick Start
+## Overview
 
-Start a new Claude Code session in the terminal and enter the following commands:
+Claude-Mem introduces a local-first memory layer that allows Claude to retain structured understanding of a project over time. Instead of relying on repeated prompts or manual summaries, the system automatically captures and compresses relevant activity into retrievable memory units.
 
-```
-> /plugin marketplace add thedotmack/claude-mem
-
-> /plugin install claude-mem
-```
-
-Restart Claude Code. Context from previous sessions will automatically appear in new sessions.
-
-**Key Features:**
-
-- 🧠 **Persistent Memory** - Context survives across sessions
-- 📊 **Progressive Disclosure** - Layered memory retrieval with token cost visibility
-- 🔍 **Skill-Based Search** - Query your project history with mem-search skill
-- 🖥️ **Web Viewer UI** - Real-time memory stream at http://localhost:37777
-- 💻 **Claude Desktop Skill** - Search memory from Claude Desktop conversations
-- 🔒 **Privacy Control** - Use `<private>` tags to exclude sensitive content from storage
-- ⚙️ **Context Configuration** - Fine-grained control over what context gets injected
-- 🤖 **Automatic Operation** - No manual intervention required
-- 🔗 **Citations** - Reference past observations with IDs (access via http://localhost:37777/api/observation/{id} or view all in the web viewer at http://localhost:37777)
-- 🧪 **Beta Channel** - Try experimental features like Endless Mode via version switching
+This enables continuity across sessions while maintaining strict control over context size, relevance, and privacy.
 
 ---
 
-## Documentation
+## Key Features
 
-📚 **[View Full Documentation](docs/)** - Browse markdown docs on GitHub
-
-### Getting Started
-
-- **[Installation Guide](https://docs.claude-mem.ai/installation)** - Quick start & advanced installation
-- **[Usage Guide](https://docs.claude-mem.ai/usage/getting-started)** - How Claude-Mem works automatically
-- **[Search Tools](https://docs.claude-mem.ai/usage/search-tools)** - Query your project history with natural language
-- **[Beta Features](https://docs.claude-mem.ai/beta-features)** - Try experimental features like Endless Mode
-
-### Best Practices
-
-- **[Context Engineering](https://docs.claude-mem.ai/context-engineering)** - AI agent context optimization principles
-- **[Progressive Disclosure](https://docs.claude-mem.ai/progressive-disclosure)** - Philosophy behind Claude-Mem's context priming strategy
-
-### Architecture
-
-- **[Overview](https://docs.claude-mem.ai/architecture/overview)** - System components & data flow
-- **[Architecture Evolution](https://docs.claude-mem.ai/architecture-evolution)** - The journey from v3 to v5
-- **[Hooks Architecture](https://docs.claude-mem.ai/hooks-architecture)** - How Claude-Mem uses lifecycle hooks
-- **[Hooks Reference](https://docs.claude-mem.ai/architecture/hooks)** - 7 hook scripts explained
-- **[Worker Service](https://docs.claude-mem.ai/architecture/worker-service)** - HTTP API & Bun management
-- **[Database](https://docs.claude-mem.ai/architecture/database)** - SQLite schema & FTS5 search
-- **[Search Architecture](https://docs.claude-mem.ai/architecture/search-architecture)** - Hybrid search with Chroma vector database
-
-### Configuration & Development
-
-- **[Configuration](https://docs.claude-mem.ai/configuration)** - Environment variables & settings
-- **[Development](https://docs.claude-mem.ai/development)** - Building, testing, contributing
-- **[Troubleshooting](https://docs.claude-mem.ai/troubleshooting)** - Common issues & solutions
+- Persistent memory across Claude Code sessions  
+- Automatic capture of tool usage and session events  
+- Semantic summarization of work into compact memory units  
+- Progressive disclosure to manage context injection cost  
+- Natural-language search over past sessions  
+- Local-only storage with full data ownership  
+- Explicit privacy controls for sensitive content  
+- Transparent and inspectable memory artifacts  
 
 ---
 
-## How It Works
+## Motivation
 
-**Core Components:**
+AI-assisted development workflows are inherently session-bound. Important architectural decisions, debugging history, and design intent are frequently lost between sessions.
 
-1. **5 Lifecycle Hooks** - SessionStart, UserPromptSubmit, PostToolUse, Stop, SessionEnd (6 hook scripts)
-2. **Smart Install** - Cached dependency checker (pre-hook script, not a lifecycle hook)
-3. **Worker Service** - HTTP API on port 37777 with web viewer UI and 10 search endpoints, managed by Bun
-4. **SQLite Database** - Stores sessions, observations, summaries
-5. **mem-search Skill** - Natural language queries with progressive disclosure
-6. **Chroma Vector Database** - Hybrid semantic + keyword search for intelligent context retrieval
+Claude-Mem aims to:
 
-See [Architecture Overview](https://docs.claude-mem.ai/architecture/overview) for details.
+- Reduce repeated explanations and prompt overhead  
+- Preserve long-term project understanding  
+- Enable longitudinal reasoning across evolving codebases  
+- Treat context as structured infrastructure rather than ad-hoc text  
 
 ---
 
-## mem-search Skill
+## System Architecture
 
-Claude-Mem provides intelligent search through the mem-search skill that auto-invokes when you ask about past work:
+Claude-Mem integrates into Claude Code using lifecycle hooks that observe activity at key moments.
 
-**How It Works:**
-- Just ask naturally: *"What did we do last session?"* or *"Did we fix this bug before?"*
-- Claude automatically invokes the mem-search skill to find relevant context
+### Core Components
 
-**Available Search Operations:**
-
-1. **Search Observations** - Full-text search across observations
-2. **Search Sessions** - Full-text search across session summaries
-3. **Search Prompts** - Search raw user requests
-4. **By Concept** - Find by concept tags (discovery, problem-solution, pattern, etc.)
-5. **By File** - Find observations referencing specific files
-6. **By Type** - Find by type (decision, bugfix, feature, refactor, discovery, change)
-7. **Recent Context** - Get recent session context for a project
-8. **Timeline** - Get unified timeline of context around a specific point in time
-9. **Timeline by Query** - Search for observations and get timeline context around best match
-10. **API Help** - Get search API documentation
-
-**Example Natural Language Queries:**
-
-```
-"What bugs did we fix last session?"
-"How did we implement authentication?"
-"What changes were made to worker-service.ts?"
-"Show me recent work on this project"
-"What was happening when we added the viewer UI?"
-```
-
-See [Search Tools Guide](https://docs.claude-mem.ai/usage/search-tools) for detailed examples.
+| Component | Responsibility |
+|---------|----------------|
+| Lifecycle Hooks | Capture session and tool activity |
+| Worker Service | Processes memory and exposes APIs |
+| SQLite Database | Stores observations and summaries |
+| Vector Search Layer | Enables semantic retrieval |
+| Memory Search Skill | Natural-language query interface |
+| Web Viewer | Local inspection and debugging UI |
 
 ---
 
-## Beta Features
+## Memory Model
 
-Claude-Mem offers a **beta channel** with experimental features like **Endless Mode** (biomimetic memory architecture for extended sessions). Switch between stable and beta versions from the web viewer UI at http://localhost:37777 → Settings.
-
-See **[Beta Features Documentation](https://docs.claude-mem.ai/beta-features)** for details on Endless Mode and how to try it.
-
----
-
-## System Requirements
-
-- **Node.js**: 18.0.0 or higher
-- **Claude Code**: Latest version with plugin support
-- **Bun**: JavaScript runtime and process manager (auto-installed if missing)
-- **uv**: Python package manager for vector search (auto-installed if missing)
-- **SQLite 3**: For persistent storage (bundled)
+| Layer | Description |
+|------|-------------|
+| Observations | Atomic records of tool usage and events |
+| Session Summaries | Compressed representations of session intent |
+| Concept Tags | Semantic labels for retrieval |
+| Timelines | Ordered reconstruction of project history |
 
 ---
-
-## Configuration
-
-Settings are managed in `~/.claude-mem/settings.json` (auto-created with defaults on first run). Configure AI model, worker port, data directory, log level, and context injection settings.
-
-See the **[Configuration Guide](https://docs.claude-mem.ai/configuration)** for all available settings and examples.
-
----
-
-## Development
-
-See the **[Development Guide](https://docs.claude-mem.ai/development)** for build instructions, testing, and contribution workflow.
-
----
-
-## Troubleshooting
-
-If experiencing issues, describe the problem to Claude and the troubleshoot skill will automatically diagnose and provide fixes.
-
-See the **[Troubleshooting Guide](https://docs.claude-mem.ai/troubleshooting)** for common issues and solutions.
-
----
-
-## Bug Reports
-
-Create comprehensive bug reports with the automated generator:
-
-```bash
-cd ~/.claude/plugins/marketplaces/thedotmack
-npm run bug-report
-```
-
-## Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes with tests
-4. Update documentation
-5. Submit a Pull Request
-
-See [Development Guide](https://docs.claude-mem.ai/development) for contribution workflow.
-
----
-
-## License
-
-This project is licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0).
-
-Copyright (C) 2025 Alex Newman (@thedotmack). All rights reserved.
-
-See the [LICENSE](LICENSE) file for full details.
-
-**What This Means:**
-
-- You can use, modify, and distribute this software freely
-- If you modify and deploy on a network server, you must make your source code available
-- Derivative works must also be licensed under AGPL-3.0
-- There is NO WARRANTY for this software
-
-**Note on Ragtime**: The `ragtime/` directory is licensed separately under the **PolyForm Noncommercial License 1.0.0**. See [ragtime/LICENSE](ragtime/LICENSE) for details.
-
----
-
-## Support
-
-- **Documentation**: [docs/](docs/)
-- **Issues**: [GitHub Issues](https://github.com/thedotmack/claude-mem/issues)
-- **Repository**: [github.com/thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
-- **Author**: Alex Newman ([@thedotmack](https://github.com/thedotmack))
-
----
-
-**Built with Claude Agent SDK** | **Powered by Claude Code** | **Made with TypeScript**
